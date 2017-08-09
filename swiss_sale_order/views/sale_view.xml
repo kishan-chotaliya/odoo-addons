@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <record id="view_order_form_inherit_sale_stock_inh" model="ir.ui.view">
+            <field name="name">sale.stock.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale_shipping']" position='attributes'>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record> -->
+    	<record id="view_order_form_inh" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='sale_pay']" position='attributes'>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_invoice']" position='after'>
+                    <button name="quotation_history"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-history"
+                            >
+                        <field name="quote_count" widget="statinfo" string="Quotations"/>
+                    </button>
+                </xpath>
+                <field name="partner_shipping_id" position="after">
+                    <field name="remarks"/>
+                </field>
+                <field name="payment_term_id" position="after">
+                    <field name="job_site"/>
+                </field>
+                <xpath expr="//notebook/page[1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            	<xpath expr="//notebook/page[1]" position="before">
+            		<page string="Grouped" autofocus="autofocus">
+                        <field name="final_sale_price" invisible="1"/>
+            			<field name="group_ids" nolabel="1">
+            				<form>
+            					<group>
+            						<field name="title"/>
+                                    <field name="total_cost" invisible="1"/>
+                                    <field name="total_sale" invisible="1"/>
+                                    <field name="total_margin" invisible="1"/>
+            					</group>
+            					<group>
+        							<field name="order_line_ids" nolabel="1">
+        								<tree>
+                                            <field name="order_line_line_ids" nolabel="1" invisible="1">
+                                                <tree editable="bottom">
+                                                    <field name="desc"/>
+                                                    <field name="cost_price" sum="Total Cost Price"/>
+                                                    <!-- <field name="sale_price_per_unit"/> -->
+                                                    <field name="total_sale_price" sum="Total Sale Price"/>
+                                                    <field name="difference"/>
+                                                    <field name="qty" sum="Total Quantity"/>
+                                                    <field name="product_id"/>
+                                                </tree>
+                                            </field>
+		            						<field name="desc"/>
+			            					<field name="cost_price" sum="Total Cost Price"/>
+			            					<!-- <field name="sale_price_per_unit" invisible="1"/> -->
+                                            <field name="total_sale_price" sum="Total Sale Price"/>
+			            					<field name="difference"/>
+			            					<!-- <field name="qty" sum="Total Quantity"/> -->
+		            						<field name="product_id"/>
+        								</tree>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="desc"/>
+                                                    <field name="cost_price" invisible='1'/>
+                                                    <!-- <field name="sale_price_per_unit" invisible='1'/> -->
+                                                    <field name="product_id" widget="many2many_tags" invisible='0'/>
+                                                </group>
+                                                <group>
+                                                    <field name="total_sale_price" invisible='1'/>
+                                                    <field name="difference" invisible='1'/>
+                                                    <!-- <field name="qty" invisible='1'/> -->
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="Product Lines">
+                                                    <field name="order_line_line_ids" nolabel="1">
+                                                        <tree editable="bottom">
+                                                            <field name="desc" invisible="1"/>
+                                                            <field name="cost_price" sum="Total Cost Price"/>
+                                                            <!-- <field name="sale_price_per_unit"/> -->
+                                                            <field name="total_sale_price" sum="Total Sale Price"/>
+                                                            <field name="difference"/>
+                                                            <field name="qty" sum="Total Quantity"/>
+                                                            <field name="product_id"/>
+                                                            <field name="vendor_id" />
+                                                        </tree>
+                                                    </field>
+                                                </page>
+                                            </notebook>
+                                        </form>
+        							</field>
+            					</group>
+            				</form>
+            				<tree>
+            					<field name="title"/>
+                                <field name="total_cost" sum='Total Cost Price'/>
+                                <field name="total_sale" sum='Toal Sale Price'/>
+                                <field name="total_margin" sum='Total Margin'/>
+            				</tree>
+            			</field>
+            		</page>
+            	</xpath>
+            </field>
+        </record>
+
+        <record id="product_template_form_view_procurement_button_inh" model="ir.ui.view">
+            <field name="name">product.template.inh</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='weight']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//div[@name='weight']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//label[@for='volume']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//div[@name='volume']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

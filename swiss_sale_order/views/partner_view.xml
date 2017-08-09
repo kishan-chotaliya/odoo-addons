@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<record id="view_partner_form_inh" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+            	<field name="city" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="state_id" position="attributes">
+            		<attribute name="invisible">1</attribute>
+            	</field>
+            	<field name="zip" position="attributes">
+            		<attribute name="placeholder">Postal Code</attribute>
+            		<attribute name="class"></attribute>
+            	</field>
+                <field name="lang" position="after">
+                    <field name="nric_no"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

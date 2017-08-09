@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_group_line,access_group_line,model_group_line,,1,0,0,0
+access_group_order_line,access_group_order_line,model_group_order_line,,1,0,0,0
+access_group_order_line_line,access_group_order_line_line,model_group_order_line_line,,1,0,0,0

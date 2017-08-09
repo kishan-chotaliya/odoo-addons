@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_saleorder_visible_document">
+    <!-- <t t-call="report.html_container"> -->
+        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})" />
+        <div class="header">
+            <div class="row">
+                <table width="100%">
+                    <tr width="100%">
+                        <td>
+                            <img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % o.company_id.logo" style="max-height: 50px;"/>
+                        </td>
+                        <td style="text-align:right;">
+                            <span t-field="o.company_id.partner_id"
+                            t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                            <p>Co.Reg: 2013</p>
+                        </td>     
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="page">
+            <div class="oe_structure"/>
+
+            <div class="row" t-if="o.state not in ['draft','sent']">
+                <div class="col-xs-6">
+                    <strong t-if="o.partner_shipping_id == o.partner_invoice_id">Invoicing and shipping address:</strong>
+                    <strong t-if="o.partner_shipping_id != o.partner_invoice_id">Invoicing address:</strong>
+                    <div t-field="o.partner_invoice_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": True, "phone_icons": True}'/>
+                    <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p>
+                    <div t-if="o.partner_shipping_id != o.partner_invoice_id" class="mt8">
+                        <strong>Shipping address:</strong>
+                        <div t-field="o.partner_shipping_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": True, "phone_icons": True}'/>
+                        <p t-if="o.partner_id.vat">VAT: <span t-field="o.partner_id.vat"/></p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div t-field="o.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3">
+                </div>
+                <div class="col-xs-6">
+                    <table style='border:1px solid black; width: -moz-available;' class="table table-condensed">
+                        <tr>
+                            <td style="text-align: center; background: black; color: white; border: solid; font-size: 20px;">
+                                <b>Contract</b>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-3">
+                    <table style='border:1px solid black; width: -moz-available;' class="table table-condensed">
+                        <tr>
+                            <td style="text-align: center; border: solid; font-size: 20px;">
+                                <span t-field="o.name"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <table style='border:1px solid black; width: -moz-available; margin-top: 30px;' class="table table-condensed">
+                        <tr style="border:2px solid black;">
+                            <td style="border:2px solid black;">
+                                1ST OWNER :
+                            </td>
+                            <td style="border:2px solid black; width: 250px;">
+                                <span t-field="o.partner_id"/>
+                            </td>
+                            <td style="border:2px solid black;">
+                                NRIC NO :
+                            </td>
+                            <td style="border:2px solid black; text-align: center;">
+                                <span t-field="o.partner_id.nric_no"/>
+                            </td>
+                            <td style="border:2px solid black;">
+                                DATE :
+                            </td>
+                            <td style="border:2px solid black; text-align: center;">
+                                <span t-field="o.date_order"/>
+                            </td>
+                        </tr>
+                        <tr style="border:2px solid black;">
+                            <td style="border:2px solid black;">
+                                JOB SITE :
+                            </td>
+                            <td style="border:2px solid black; width: 250px;">
+                                <span t-field="o.job_site"/>
+                            </td>
+                            <td style="border:2px solid black;">
+                                MODEL :
+                            </td>
+                            <td style="border:2px solid black; text-align: center;">
+                                
+                            </td>
+                            <td style="border:2px solid black;">
+                                H/P :
+                            </td>
+                            <td style="border:2px solid black; text-align: center;">
+                                <span t-field="o.partner_id.mobile"/>
+                            </td>
+                        </tr>
+                        <tr style="border:2px solid black;">
+                            <td style="border:2px solid black;">
+                                Sale Excutive
+                            </td>
+                            <td style="border:2px solid black; width: 250px;">
+                                <span t-field="o.user_id"/>
+                            </td>
+                            <td style="border:2px solid black;">
+                                Phone :
+                            </td>
+                            <td style="border:2px solid black; text-align: center;">
+                                <span t-field="o.user_id.phone"/>
+                            </td>
+                            <td style="border:2px solid black;">
+                                TEL :
+                            </td>
+                            <td style="border:2px solid black; text-align: center;">
+                                <span t-field="o.partner_id.phone"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <table style='border:1px solid black; width: -moz-available; margin-top: 30px;' class="table table-condensed">
+                        <tr style="border:2px solid black;">
+                            <td style="border:2px solid black; text-align: center;">
+                                <b>NO</b>
+                            </td>
+                            <td style="border:2px solid black; text-align: center;">
+                                <b>DESCRIPTION</b>
+                            </td>
+                            <td style="border:2px solid black; text-align: center;">
+                                <b>AMOUNT(S$)</b>
+                            </td>
+                        </tr>
+                        <t t-foreach="o.group_ids" t-as="group">
+                            <tr style="border:2px solid black;">
+                                <td style="border:2px solid black;">
+                                </td>
+                                <td style="border:2px solid black; width: 700px;">
+                                    <b><span t-field="group.title"/></b>
+                                </td>
+                                <td style="border:2px solid black;">
+                                </td>
+                            </tr>
+                            <t t-foreach="group.order_line_ids" t-as="group_line">
+                                <tr style="border:2px solid black;">
+                                    <td style="border:2px solid black;">
+                                    </td>
+                                    <td style="border:2px solid black; width: 700px;">
+                                        <span t-field="group_line.desc"/>
+                                    </td>
+                                    <td style="border:2px solid black; text-align: right;">
+                                        <span t-field="group_line.total_sale_price" t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr style="border:2px solid black; height: 33px;">
+                                <td style="border:2px solid black;">
+                                </td>
+                                <td style="border:2px solid black;">
+                                </td>
+                                <td style="border:2px solid black;">
+                                </td>
+                            </tr>
+                        </t>
+                        <tr style="border:2px solid black;">
+                            <td style="border:2px solid black;">
+                            </td>
+                            <td style="border:2px solid black; text-align: right;">
+                                <b>Total Amount:</b>
+                            </td>
+                            <td style="border:2px solid black; text-align: right;">
+                                <b><span t-field="o.final_sale_price" t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/></b>
+                            </td>
+                        </tr>
+                        <tr style="border:2px solid black;">
+                            <td style="border:2px solid black;">
+                            </td>
+                            <td style="border:2px solid black; text-align: right;">
+                                <b>Deposit:</b>
+                            </td>
+                            <td style="border:2px solid black; text-align: right;">
+                                <!-- <b><span t-field="group.total_sale" t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/></b> -->
+                            </td>
+                        </tr>
+                        <tr style="border:2px solid black;">
+                            <td style="border:2px solid black;">
+                            </td>
+                            <td style="border:2px solid black; text-align: right;">
+                                <b>Balance:</b>
+                            </td>
+                            <td style="border:2px solid black; text-align: right;">
+                                <!-- <b><span t-field="group.total_sale" t-options="{'widget': 'monetary', 'display_currency': o.pricelist_id.currency_id}"/></b> -->
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    <table style='margin-top: 25px; page-break-after: avoid;' class="table table-condensed">
+                        <tr style='border: hidden;'>
+                            <td>
+                                I/We have read and understood the contents<br/>
+                                of the Payment Advisory Note above:
+                            </td>
+                        </tr>
+                        <tr style='border: hidden;'>
+                            <td></td>
+                        </tr>
+                        <tr style='border: hidden;'><td></td></tr>
+                        <tr><td></td></tr>
+                        <tr>
+                            <td style="border:2px solid black; height: 100px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <span>Name &amp; Signature</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-5">
+                    <table style='margin-top: 25px; page-break-after: avoid;' class="table table-condensed">
+                        <tr style='border: hidden;'>
+                            <td>
+                                The contents of the Payment Advisory Note<br/>
+above were read and translated to me and<br/>
+I/We understand the implications:
+                            </td>
+                        </tr>
+                        <tr><td></td></tr>
+                        <tr>
+                            <td style="border:2px solid black; height: 100px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <span>Name &amp; Signature</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <u><strong><span>TERMS &amp; CONDITIONS</span></strong></u>
+            <p t-field="o.note" />
+            
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>
+                        I/We agree and confirm<br/>
+                        acceptance of the descriptions,<br/>
+                        price, layout, Terms &amp; Conditions<br/>
+                        herein above stated.
+                    </p>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4">
+                    <p>
+                        For and on behalf of<br/>
+                        Swiss Design Studio
+                    </p>
+                </div>
+            </div>
+
+            <div class="row" style='margin-top: 75px;'>
+                <div class="col-xs-4" style='text-align: center;'>
+                    <p style="border-top: 2px solid black;"><b>(Signature)</b></p>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4" style='text-align: center;'>
+                    <p style="border-top: 2px solid black;"><b>(Signature)</b></p>
+                    <p style="border-bottom: 2px solid black;"><b>Signed &amp; Issued By:</b></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <p style="border-bottom: 2px solid black;"><b>Name:</b></p>
+                    <p style="border-bottom: 2px solid black;"><b>NRIC NO:</b></p>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4">
+                </div>
+            </div>
+            <div class="oe_structure"/>
+            </div>
+            <div class="footer">
+                <div class="text-left">
+                    <span>Registerd Office:</span><span t-field="o.company_id.partner_id.street"/>
+                    <span t-field="o.company_id.partner_id.street2"/><span t-field="o.company_id.partner_id.city"/><span t-field="o.company_id.partner_id.state_id.name"/><span t-field="o.company_id.partner_id.zip"/><span t-field="o.company_id.partner_id.country_id.name"/>
+                </div>
+                <div class="text-right">
+                    <span>Page.</span><span class="page"/>
+                </div>
+            </div>
+       <!-- </t> -->
+    <!-- </t> -->
+</template>
+
+<template id="report_saleorder_document" inherit_id="sale.report_saleorder">
+    <xpath expr="//t[@t-foreach='docs']" position="replace">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="swiss_sale_order.report_saleorder_visible_document" t-lang="o.partner_id.lang"/>
+        </t>
+    </xpath>
+</template>
+</data>
+</odoo>
